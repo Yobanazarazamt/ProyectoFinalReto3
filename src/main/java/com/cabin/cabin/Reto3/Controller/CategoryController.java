@@ -25,19 +25,31 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/all")
-    public List<Category> findAllCategory(){
+    public List<Category> findAllCategory() {
         return categoryService.getCategorys();
     }
-    
+
     @GetMapping("Category/{id}")
-    public Optional<Category> findCategoryID(@PathVariable("id") int id){
-      return categoryService.getCategory(id);
+    public Optional<Category> findCategoryID(@PathVariable("id") int id) {
+        return categoryService.getCategory(id);
     }
-     
+
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Category addCategory(@RequestBody Category category){
+    public Category addCategory(@RequestBody Category category) {
         return categoryService.save(category);
     }
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Category update(@RequestBody Category category) {
+        return categoryService.update(category);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") int gamaId) {
+        return categoryService.deleteCategory(gamaId);
+    }
+
 }
-    

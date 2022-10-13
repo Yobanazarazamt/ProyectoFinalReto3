@@ -33,4 +33,35 @@ public class AdminService {
             }
         }
     }
+    
+    public Admin update(Admin admin){
+        if(admin.getIdAdmin()!=null){
+            Optional<Admin> e= adminRepository.getAdmin(admin.getIdAdmin());
+            if(!e.isEmpty()){
+                if(admin.getName()!=null){
+                    e.get().setName(admin.getName());
+                }
+                if(admin.getEmail()!=null){
+                    e.get().setEmail(admin.getEmail());
+                }
+                if(admin.getPassword()!=null){
+                    e.get().setPassword(admin.getPassword());
+                }
+                adminRepository.save(e.get());
+                return e.get();
+            }else{
+                return admin;
+            }
+        }else{
+            return admin;
+        }
+    }
+    public boolean deleteAdmin(int id){
+        Boolean d = getAdmin(id).map(admin -> {
+            adminRepository.delete(admin);
+            return true;
+        }).orElse(false);
+        return d;
+    }
+
 }

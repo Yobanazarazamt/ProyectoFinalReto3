@@ -17,16 +17,31 @@ public class ScoreController {
     private ScoreService scoreService;
 
     @GetMapping("/all")
-    public List<Score> getAll(){
+    public List<Score> getAll() {
         return scoreService.getAll();
     }
+
     @GetMapping("/{id}")
-    public Optional<Score> getScore(@PathVariable("id") Integer id){
+    public Optional<Score> getScore(@PathVariable("id") Integer id) {
         return scoreService.getScore(id);
     }
+
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Score save(@RequestBody  Score score){
+    public Score save(@RequestBody Score score) {
         return scoreService.save(score);
     }
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Score update(@RequestBody Score score) {
+        return scoreService.update(score);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("id") int scoreId) {
+        return scoreService.delete(scoreId);
+    }
+
 }
